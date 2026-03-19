@@ -1,9 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const db = require("./db");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -11,7 +12,7 @@ app.use(express.json());
 db.query("SET SQL_SAFE_UPDATES = 0");
 
 app.get("/transactions", (req, res) => {
-    const { month } = req.body;
+    const { month } = req.query;
 
     const sql = `
         SELECT * FROM transactions WHERE month = ?
