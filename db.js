@@ -2,9 +2,14 @@ const mysql = require("mysql2");
 
 const db = mysql.createPool({
   uri: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 0,
 });
 
 db.getConnection((err, connection) => {
