@@ -9,8 +9,6 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-db.query("SET SQL_SAFE_UPDATES = 0");
-
 app.get("/transactions", (req, res) => {
     const { month } = req.query;
 
